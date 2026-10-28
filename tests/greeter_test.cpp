@@ -2,30 +2,16 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include "order.hpp"
 
-class IBasket 
-{
-    public:
-        virtual ~IBasket() = default;
-        virtual void pay() = 0;
-};
+
 class MockBasket : public IBasket
 {
     public:
         MOCK_METHOD (void, pay, (), (override));
 };
 
-class Order
-{
-        
-    public:
-        IBasket& m_basket;
-        Order(IBasket& basket) : m_basket(basket) {}
-        void placeOrder()
-        {
-            m_basket.pay();
-        }
-};
+
 
 TEST(OrderTests, PlacingOrderPaysForbasket) 
 {
